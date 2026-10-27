@@ -1,0 +1,216 @@
+/* ===== CareerCraft PK Authentication Pages ===== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(15, 157, 145, 0.14), transparent 32%),
+    radial-gradient(circle at 85% 85%, rgba(23, 43, 77, 0.12), transparent 35%),
+    linear-gradient(135deg, #f4f7fa 0%, #eaf4f5 50%, #f4f7fa 100%);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 42px 38px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 157, 145, 0.16);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(23, 43, 77, 0.12);
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.auth-card:hover {
+  box-shadow: 0 22px 60px rgba(23, 43, 77, 0.16);
+}
+
+.auth-brand {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #172b4d;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+.auth-brand span {
+  color: #0f9d91;
+}
+
+.auth-card h1 {
+  margin: 0 0 10px;
+  color: #172b4d;
+  font-size: 30px;
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.7px;
+}
+
+.auth-subtitle {
+  margin: 0 0 28px;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-card label {
+  margin: 0 0 8px;
+  color: #172b4d;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.auth-card input {
+  width: 100%;
+  min-height: 48px;
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  color: #172b4d;
+  background: #ffffff;
+  border: 1px solid #d8e1eb;
+  border-radius: 10px;
+  outline: none;
+  font: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.auth-card input::placeholder {
+  color: #94a3b8;
+}
+
+.auth-card input:hover {
+  border-color: #a8c9c9;
+}
+
+.auth-card input:focus {
+  border-color: #0f9d91;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(15, 157, 145, 0.12);
+}
+
+.auth-card button {
+  width: 100%;
+  min-height: 49px;
+  margin-top: 4px;
+  padding: 13px 18px;
+  color: #ffffff;
+  background: linear-gradient(120deg, #172b4d 0%, #0f766e 100%);
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 7px 16px rgba(15, 118, 110, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.auth-card button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 11px 23px rgba(15, 118, 110, 0.27);
+}
+
+.auth-card button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.auth-card button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.auth-error,
+.auth-success {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.auth-error {
+  color: #b42318;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+}
+
+.auth-success {
+  color: #087443;
+  background: #ecfdf3;
+  border: 1px solid #abefc6;
+}
+
+.auth-switch {
+  margin: 25px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.auth-switch a {
+  color: #0f766e;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.auth-switch a:hover {
+  color: #172b4d;
+  text-decoration: underline;
+}
+
+.auth-card a:focus-visible,
+.auth-card button:focus-visible {
+  outline: 3px solid rgba(15, 157, 145, 0.45);
+  outline-offset: 3px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 24px 15px;
+  }
+
+  .auth-card {
+    padding: 32px 23px;
+    border-radius: 16px;
+  }
+
+  .auth-brand {
+    margin-bottom: 23px;
+    font-size: 23px;
+  }
+
+  .auth-card h1 {
+    font-size: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-card,
+  .auth-card input,
+  .auth-card button,
+  .auth-switch a {
+    transition: none;
+  }
+}

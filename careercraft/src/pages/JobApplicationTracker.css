@@ -1,0 +1,565 @@
+
+.job-tracker-page {
+  min-height: 100vh;
+  padding: 48px 24px 72px;
+  background: #f5f7fb;
+  color: #202a3b;
+}
+
+.job-tracker-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.job-tracker-header,
+.tracker-form-heading,
+.tracker-list-heading,
+.tracker-application-title-row,
+.tracker-form-actions,
+.tracker-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.job-tracker-header {
+  margin-bottom: 32px;
+}
+
+.job-tracker-eyebrow {
+  margin: 0 0 10px;
+  color: #0f918d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.job-tracker-header h1 {
+  margin: 0;
+  color: #18253b;
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.2;
+}
+
+.job-tracker-subtitle {
+  max-width: 600px;
+  margin: 12px 0 0;
+  color: #69758a;
+  line-height: 1.7;
+}
+
+.tracker-primary-button,
+.tracker-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.tracker-primary-button {
+  background: #087f8c;
+  color: #fff;
+}
+
+.tracker-primary-button:hover {
+  background: #066a75;
+  transform: translateY(-1px);
+}
+
+.tracker-secondary-button {
+  border-color: #dce2eb;
+  background: #fff;
+  color: #344054;
+}
+
+.tracker-secondary-button:hover {
+  background: #f2f5f9;
+}
+
+.tracker-primary-button:disabled,
+.tracker-secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.tracker-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.tracker-stat-card,
+.tracker-form-card,
+.tracker-application-card,
+.tracker-empty-state {
+  border: 1px solid #e7ebf2;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 22px rgb(26 42 68 / 4%);
+}
+
+.tracker-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 23px;
+}
+
+.tracker-stat-label {
+  color: #68758a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tracker-stat-card strong {
+  color: #19263b;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.tracker-stat-detail {
+  color: #8993a4;
+  font-size: 12px;
+}
+
+.tracker-alert {
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.tracker-alert-error {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #b42318;
+}
+
+.tracker-alert-success {
+  border-color: #a7f3d0;
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.tracker-form-card {
+  margin-bottom: 30px;
+  padding: 28px;
+}
+
+.tracker-form-heading {
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.tracker-form-heading h2,
+.tracker-list-heading h2 {
+  margin: 0;
+  color: #202a3b;
+  font-size: 21px;
+}
+
+.tracker-form-heading p,
+.tracker-list-heading p {
+  margin: 8px 0 0;
+  color: #758196;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tracker-close-button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 9px;
+  background: #f2f5f9;
+  color: #465268;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.tracker-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.tracker-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tracker-field-full {
+  grid-column: 1 / -1;
+}
+
+.tracker-field label,
+.tracker-filter > span,
+.tracker-status-update > span {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tracker-field input,
+.tracker-field select,
+.tracker-field textarea,
+.tracker-filter select,
+.tracker-status-update select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d9e0ea;
+  border-radius: 9px;
+  background: #fff;
+  color: #263248;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tracker-field input,
+.tracker-field select,
+.tracker-filter select,
+.tracker-status-update select {
+  min-height: 44px;
+  padding: 10px 12px;
+}
+
+.tracker-field textarea {
+  padding: 12px;
+  resize: vertical;
+}
+
+.tracker-field input:focus,
+.tracker-field select:focus,
+.tracker-field textarea:focus,
+.tracker-filter select:focus,
+.tracker-status-update select:focus {
+  border-color: #0f9da4;
+  box-shadow: 0 0 0 3px rgb(15 157 164 / 12%);
+}
+
+.tracker-form-actions {
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.tracker-applications-section {
+  margin-top: 36px;
+}
+
+.tracker-list-heading {
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.tracker-filter,
+.tracker-status-update {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.tracker-filter {
+  width: 180px;
+}
+
+.tracker-application-list {
+  display: grid;
+  gap: 16px;
+}
+
+.tracker-application-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 24px;
+}
+
+.tracker-company-mark {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #e0f5f4;
+  color: #087f8c;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.tracker-application-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.tracker-application-title-row {
+  align-items: flex-start;
+}
+
+.tracker-application-title-row h3 {
+  margin: 0;
+  color: #202a3b;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.tracker-company-name {
+  margin: 5px 0 0;
+  color: #6e7a8e;
+  font-size: 14px;
+}
+
+.tracker-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #eef2f6;
+  color: #475467;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tracker-status-saved {
+  background: #f1edff;
+  color: #6941c6;
+}
+
+.tracker-status-applied {
+  background: #e7f1ff;
+  color: #175cd3;
+}
+
+.tracker-status-interview {
+  background: #fff3d6;
+  color: #975a00;
+}
+
+.tracker-status-offer {
+  background: #dcfae6;
+  color: #067647;
+}
+
+.tracker-status-rejected {
+  background: #fee4e2;
+  color: #b42318;
+}
+
+.tracker-status-withdrawn {
+  background: #f2f4f7;
+  color: #475467;
+}
+
+.tracker-application-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 16px;
+  color: #788397;
+  font-size: 12px;
+}
+
+.tracker-application-meta a {
+  color: #087f8c;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tracker-application-meta a:hover {
+  text-decoration: underline;
+}
+
+.tracker-application-notes {
+  margin: 15px 0 0;
+  color: #5d697d;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.tracker-card-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #edf0f5;
+}
+
+.tracker-status-update {
+  width: 170px;
+  margin-right: auto;
+}
+
+.tracker-status-update > span {
+  color: #788397;
+  font-size: 11px;
+}
+
+.tracker-status-update select {
+  min-height: 37px;
+  padding: 7px 9px;
+  font-size: 12px;
+}
+
+.tracker-text-button {
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #087f8c;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tracker-text-button:hover {
+  background: #eaf8f8;
+}
+
+.tracker-delete-button {
+  color: #c43232;
+}
+
+.tracker-delete-button:hover {
+  background: #fff0f0;
+}
+
+.tracker-text-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.tracker-empty-state {
+  padding: 54px 24px;
+  text-align: center;
+}
+
+.tracker-empty-icon {
+  display: flex;
+  width: 54px;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  border-radius: 15px;
+  background: #e5f7f6;
+  color: #087f8c;
+  font-size: 28px;
+}
+
+.tracker-empty-state h3 {
+  margin: 0;
+  color: #202a3b;
+  font-size: 19px;
+}
+
+.tracker-empty-state p {
+  max-width: 430px;
+  margin: 10px auto 20px;
+  color: #788397;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 850px) {
+  .tracker-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .job-tracker-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .job-tracker-page {
+    padding: 28px 14px 48px;
+  }
+
+  .job-tracker-header h1 {
+    font-size: 29px;
+  }
+
+  .tracker-stat-grid {
+    gap: 12px;
+  }
+
+  .tracker-stat-card {
+    padding: 17px;
+  }
+
+  .tracker-stat-card strong {
+    font-size: 27px;
+  }
+
+  .tracker-form-card {
+    padding: 19px;
+  }
+
+  .tracker-form-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .tracker-field-full {
+    grid-column: auto;
+  }
+
+  .tracker-list-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tracker-filter {
+    width: 100%;
+  }
+
+  .tracker-application-card {
+    gap: 12px;
+    padding: 17px;
+  }
+
+  .tracker-company-mark {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .tracker-application-title-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tracker-card-actions {
+    align-items: stretch;
+  }
+
+  .tracker-status-update {
+    width: 100%;
+    margin-right: 0;
+  }
+}
