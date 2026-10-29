@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -25,13 +24,7 @@ const careerSkills = {
   },
   backend: {
     title: "Backend Developer",
-    skills: [
-      "JavaScript",
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "REST APIs",
-    ],
+    skills: ["JavaScript", "Node.js", "Express", "PostgreSQL", "REST APIs"],
   },
   uiux: {
     title: "UI/UX Designer",
@@ -321,8 +314,6 @@ function removeCareerActivity(activity) {
 
     if (!Array.isArray(saved)) return false;
 
-    // Use the activity ID when available.
-    // Otherwise, match the exact record.
     const index = activity.id
       ? saved.findIndex((item) => item?.id === activity.id)
       : saved.findIndex(
@@ -774,33 +765,87 @@ function Dashboard() {
 
             <div className="dashboard-tools-grid">
               <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon skill-tool-icon">✳</div>
+                <div className="dashboard-tool-icon skill-tool-icon">
+                  ✳
+                </div>
+
                 <h3>Skill Gap Analysis</h3>
+
                 <p>
                   Find skills to develop for your target career.
                 </p>
+
                 <Link to="/skill-gap" className="dashboard-tool-link">
                   Explore skills →
                 </Link>
               </article>
 
               <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon analyzer-tool-icon">↗</div>
+                <div className="dashboard-tool-icon analyzer-tool-icon">
+                  ↗
+                </div>
+
                 <h3>Job Analyzer</h3>
+
                 <p>
                   Identify skills required for a job opportunity.
                 </p>
+
                 <Link to="/job-analyzer" className="dashboard-tool-link">
                   Analyze a job →
                 </Link>
               </article>
 
               <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon profile-tool-icon">◎</div>
+                <div className="dashboard-tool-icon roadmap-tool-icon">
+                  ▤
+                </div>
+
+                <h3>Job Application Tracker</h3>
+
+                <p>
+                  Track applications, update statuses, and manage interview
+                  dates and notes.
+                </p>
+
+                <Link
+                  to="/job-applications"
+                  className="dashboard-tool-link"
+                >
+                  Track applications →
+                </Link>
+              </article>
+
+              <article className="dashboard-tool-card">
+                <div className="dashboard-tool-icon profile-tool-icon">
+                  ◎
+                </div>
+
+                <h3>CV Builder</h3>
+
+                <p>
+                  Create a professional CV tailored to your career goals.
+                </p>
+
+                <Link
+                  to="/cv-generator"
+                  className="dashboard-tool-link"
+                >
+                  Build my CV →
+                </Link>
+              </article>
+
+              <article className="dashboard-tool-card">
+                <div className="dashboard-tool-icon profile-tool-icon">
+                  ◎
+                </div>
+
                 <h3>Career Profile</h3>
+
                 <p>
                   Update your education, experience, and career goal.
                 </p>
+
                 <Link to="/profile" className="dashboard-tool-link">
                   Update profile →
                 </Link>
@@ -883,9 +928,7 @@ function Dashboard() {
                           <button
                             type="button"
                             className="dashboard-activity-remove"
-                            onClick={() =>
-                              handleRemoveActivity(activity)
-                            }
+                            onClick={() => handleRemoveActivity(activity)}
                             aria-label={`Remove activity: ${getActivityDescription(activity)}`}
                             title="Remove this activity"
                           >
@@ -912,9 +955,7 @@ function Dashboard() {
                         <time className="dashboard-activity-time">
                           {activity.timestamp &&
                           !Number.isNaN(Date.parse(activity.timestamp))
-                            ? new Date(
-                                activity.timestamp
-                              ).toLocaleString()
+                            ? new Date(activity.timestamp).toLocaleString()
                             : "Date unavailable"}
                         </time>
                       </div>

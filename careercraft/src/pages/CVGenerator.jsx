@@ -48,7 +48,37 @@ const templates = [
     name: "Developer Portfolio",
     description: "Puts technical skills and projects first.",
   },
+  {
+    id: "ats",
+    name: "ATS Professional",
+    description: "A clean, single-column layout for job applications.",
+  },
+  {
+    id: "software",
+    name: "Software Engineer",
+    description: "Highlights technical skills, projects, and experience.",
+  },
+  {
+    id: "graduate",
+    name: "Graduate & Internship",
+    description: "Prioritizes education, projects, and relevant skills.",
+  },
 ];
+
+const colorPalettes = {
+  default: { name: "Template default", primary: null, accent: null },
+  navy: { name: "Navy Blue", primary: "#172B4D", accent: "#4776B8" },
+  teal: { name: "Teal", primary: "#0F6964", accent: "#0F9D91" },
+  purple: { name: "Purple", primary: "#392F70", accent: "#7959C7" },
+  burgundy: { name: "Burgundy", primary: "#762C45", accent: "#C15B78" },
+  forest: { name: "Forest Green", primary: "#23372D", accent: "#71977C" },
+  monochrome: { name: "Black & Grey", primary: "#282828", accent: "#777777" },
+};
+
+const hexToRgb = (hex) => {
+  const value = hex.replace("#", "");
+  return [0, 2, 4].map((index) => parseInt(value.slice(index, index + 2), 16));
+};
 
 const richTextFields = new Set([
   "summary",
@@ -62,6 +92,9 @@ const templateColors = {
   teal: { primary: [15, 105, 100], accent: [15, 157, 145] },
   minimal: { primary: [40, 40, 40], accent: [80, 80, 80] },
   developer: { primary: [57, 47, 112], accent: [91, 75, 196] },
+  ats: { primary: [31, 41, 55], accent: [75, 85, 99] },
+  software: { primary: [22, 78, 99], accent: [8, 145, 178] },
+  graduate: { primary: [55, 65, 81], accent: [180, 83, 9] },
 };
 
 function escapeHTML(value) {
@@ -234,6 +267,7 @@ function CVGenerator() {
 
   const [formData, setFormData] = useState(emptyCV);
   const [selectedTemplate, setSelectedTemplate] = useState("classic");
+  const [selectedPalette, setSelectedPalette] = useState("default");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
@@ -253,6 +287,7 @@ function CVGenerator() {
 
       let savedDraft = {};
       let savedTemplate = "classic";
+      let savedPalette = "default";
 
       try {
         const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
@@ -263,6 +298,9 @@ function CVGenerator() {
 
             if (templates.some((item) => item.id === parsed.selectedTemplate)) {
               savedTemplate = parsed.selectedTemplate;
+            }
+            if (Object.prototype.hasOwnProperty.call(colorPalettes, parsed.selectedPalette)) {
+              savedPalette = parsed.selectedPalette;
             }
           } else {
             // Support drafts saved by the original version.
@@ -297,6 +335,7 @@ function CVGenerator() {
         });
 
         setSelectedTemplate(savedTemplate);
+        setSelectedPalette(savedPalette);
         setLoading(false);
       }
     }
@@ -314,7 +353,7 @@ function CVGenerator() {
     try {
       localStorage.setItem(
         storageKey,
-        JSON.stringify({ formData, selectedTemplate })
+        JSON.stringify({ formData, selectedTemplate, selectedPalette })
       );
 
       setSaved(true);
@@ -325,7 +364,7 @@ function CVGenerator() {
     } catch {
       setError("Unable to save your draft in this browser.");
     }
-  }, [formData, selectedTemplate, loading, storageKey]);
+  }, [formData, selectedTemplate, selectedPalette, loading, storageKey]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -437,17 +476,31 @@ function CVGenerator() {
     );
   }
 
-  function renderStandardSections({ developer = false } = {}) {
-    return developer ? (
+  function renderStandardSections({ developer = false, graduate = false } = {}) {
+    if (developer) {
+      return (
+        <>
+          {renderPreviewSection("Projects", formData.projects, "projects")}
+          {renderPreviewSection("Experience & Internships", formData.experience, "experience")}
+          {renderPreviewSection("Education", formData.education, "education")}
+        </>
+      );
+    }
+
+    if (graduate) {
+      return (
+        <>
+          {renderPreviewSection("Education", formData.education, "education")}
+          {renderPreviewSection("Projects", formData.projects, "projects")}
+          {renderPreviewSection("Experience & Internships", formData.experience, "experience")}
+        </>
+      );
+    }
+
+    return (
       <>
-        {renderPreviewSection("Projects", formData.projects, "projects")}
+        {renderPreviewSection("Education", formData.education, "education")}
         {renderPreviewSection("Experience & Internships", formData.experience, "experience")}
-        {renderPreviewSection("Education", formData.education, "education")}
-      </>
-    ) : (
-      <>
-        {renderPreviewSection("Education", formData.education, "education")}
-        {renderPreviewSection("Experience", formData.experience, "experience")}
         {renderPreviewSection("Projects", formData.projects, "projects")}
       </>
     );
@@ -465,10 +518,17 @@ function CVGenerator() {
       const pageHeight = pdf.internal.pageSize.getHeight();
       const margin = 14;
       const bottomMargin = 14;
-      const colors = templateColors[selectedTemplate] || templateColors.classic;
+      const baseColors = templateColors[selectedTemplate] || templateColors.classic;
+      const palette = colorPalettes[selectedPalette] || colorPalettes.default;
+      const colors = palette.primary
+        ? { primary: hexToRgb(palette.primary), accent: hexToRgb(palette.accent) }
+        : baseColors;
       const isTeal = selectedTemplate === "teal";
       const isMinimal = selectedTemplate === "minimal";
       const isDeveloper = selectedTemplate === "developer";
+      const isATS = selectedTemplate === "ats";
+      const isSoftware = selectedTemplate === "software";
+      const isGraduate = selectedTemplate === "graduate";
 
       let y = 0;
       let currentX = margin;
@@ -660,9 +720,9 @@ function CVGenerator() {
       } else {
         // CLASSIC, MINIMAL and DEVELOPER use different header treatments
         // and their own section order.
-        const headerHeight = isMinimal ? 31 : isDeveloper ? 43 : 39;
+        const headerHeight = isMinimal || isATS ? 31 : isDeveloper || isSoftware ? 43 : 39;
 
-        if (isMinimal) {
+        if (isMinimal || isATS || isGraduate) {
           pdf.setFillColor(255, 255, 255);
           pdf.rect(0, 0, pageWidth, headerHeight, "F");
           pdf.setDrawColor(...colors.primary);
@@ -679,9 +739,9 @@ function CVGenerator() {
         }
 
         pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(isDeveloper ? 22 : 20);
+        pdf.setFontSize(isDeveloper || isSoftware ? 22 : 20);
         pdf.setTextColor(
-          ...(isMinimal ? colors.primary : [255, 255, 255])
+          ...(isMinimal || isATS || isGraduate ? colors.primary : [255, 255, 255])
         );
 
         const nameLines = pdf.splitTextToSize(name, currentWidth);
@@ -691,7 +751,7 @@ function CVGenerator() {
           pdf.setFont("helvetica", "normal");
           pdf.setFontSize(10);
           pdf.setTextColor(
-            ...(isMinimal ? colors.accent : isDeveloper ? [221, 215, 255] : [190, 238, 232])
+            ...(isMinimal || isATS || isGraduate ? colors.accent : isDeveloper ? [221, 215, 255] : isSoftware ? [207, 250, 254] : [190, 238, 232])
           );
           pdf.text(jobTitle, margin, 13 + nameLines.length * 7);
         }
@@ -706,15 +766,20 @@ function CVGenerator() {
           y += 2;
         }
 
-        if (isDeveloper) {
+        if (isDeveloper || isSoftware) {
           addSection("Professional Summary", formData.summary, "summary");
-
-          // Developer layout gives projects and technical skills priority.
           addSection("Technical Skills", formData.skills, "skills");
           addSection("Featured Projects", formData.projects, "projects");
           addSection("Experience & Internships", formData.experience, "experience");
           addSection("Education", formData.education, "education");
+        } else if (isGraduate) {
+          addSection("Professional Summary", formData.summary, "summary");
+          addSection("Education", formData.education, "education");
+          addSection("Projects", formData.projects, "projects");
+          addSection("Skills", formData.skills, "skills");
+          addSection("Experience & Internships", formData.experience, "experience");
         } else {
+          // Classic, Minimal and ATS keep a straightforward reading order.
           addSection("Professional Summary", formData.summary, "summary");
           addSection("Education", formData.education, "education");
           addSection("Experience & Internships", formData.experience, "experience");
@@ -759,6 +824,20 @@ function CVGenerator() {
             </Link>
           </header>
 
+          <nav className="cv-builder-progress" aria-label="CV creation steps">
+            <div className="cv-progress-step is-complete">
+              <span>01</span><div><strong>Choose a design</strong><small>Pick your CV template</small></div>
+            </div>
+            <span className="cv-progress-line" aria-hidden="true" />
+            <div className="cv-progress-step is-active">
+              <span>02</span><div><strong>Add your details</strong><small>Complete your information</small></div>
+            </div>
+            <span className="cv-progress-line" aria-hidden="true" />
+            <div className="cv-progress-step">
+              <span>03</span><div><strong>Preview & download</strong><small>Review your finished CV</small></div>
+            </div>
+          </nav>
+
           {loading ? (
             <div className="cv-status">Preparing your CV...</div>
           ) : (
@@ -769,7 +848,7 @@ function CVGenerator() {
                     <p className="cv-eyebrow">CHOOSE YOUR DESIGN</p>
                     <h2>CV Templates</h2>
                   </div>
-                  <span>4 free templates</span>
+                  <span>{templates.length} free templates</span>
                 </div>
 
                 <div className="cv-template-grid">
@@ -804,7 +883,7 @@ function CVGenerator() {
                               <i />
                             </div>
                           </div>
-                        ) : template.id === "developer" ? (
+                        ) : template.id === "developer" || template.id === "software" ? (
                           <div className="cv-thumb-developer-layout">
                             <i className="cv-thumb-header" />
                             <i className="cv-thumb-title" />
@@ -848,8 +927,42 @@ function CVGenerator() {
                 </div>
               </section>
 
-              <div className="cv-workspace">
-                <section className="cv-editor">
+              <section className="cv-color-section" aria-labelledby="cv-color-heading">
+                <div className="cv-color-heading">
+                  <div>
+                    <p className="cv-eyebrow">PERSONALIZE COLORS</p>
+                    <h2 id="cv-color-heading">Choose a Color Theme</h2>
+                    <p>Colors change independently. Your selected template layout stays the same.</p>
+                  </div>
+                  <span className="cv-color-selected">{colorPalettes[selectedPalette].name}</span>
+                </div>
+                <div className="cv-palette-grid">
+                  {Object.entries(colorPalettes).map(([id, palette]) => {
+                    const defaultColors = templateColors[selectedTemplate] || templateColors.classic;
+                    const primary = palette.primary || `rgb(${defaultColors.primary.join(",")})`;
+                    const accent = palette.accent || `rgb(${defaultColors.accent.join(",")})`;
+                    return (
+                      <button
+                        type="button"
+                        key={id}
+                        className={`cv-palette-option ${selectedPalette === id ? "selected" : ""}`}
+                        onClick={() => setSelectedPalette(id)}
+                        aria-pressed={selectedPalette === id}
+                      >
+                        <span className="cv-palette-swatches" aria-hidden="true">
+                          <i style={{ background: primary }} />
+                          <i style={{ background: accent }} />
+                        </span>
+                        <span>{palette.name}</span>
+                        {selectedPalette === id && <span className="cv-palette-check">✓</span>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
+
+              <div className="cv-workspace cv-workspace-redesigned">
+                <section className="cv-editor cv-editor-redesigned">
                   <div className="cv-panel-heading">
                     <div>
                       <p className="cv-eyebrow">STEP 1</p>
@@ -1017,7 +1130,7 @@ function CVGenerator() {
                   </div>
                 </section>
 
-                <section className="cv-preview-panel">
+                <section className="cv-preview-panel cv-preview-redesigned">
                   <div className="cv-preview-toolbar">
                     <div>
                       <p className="cv-eyebrow">STEP 2</p>
@@ -1026,7 +1139,13 @@ function CVGenerator() {
                     <span className="cv-template-label">{selectedTemplateName}</span>
                   </div>
 
-                  <article className={`cv-document cv-document-${selectedTemplate}`}>
+                  <article
+                    className={`cv-document cv-document-${selectedTemplate}`}
+                    style={selectedPalette !== "default" ? {
+                      "--cv-primary": colorPalettes[selectedPalette].primary,
+                      "--cv-accent": colorPalettes[selectedPalette].accent,
+                    } : undefined}
+                  >
                     {selectedTemplate === "teal" ? (
                       <div className="cv-document-teal-layout">
                         <aside className="cv-document-sidebar">
@@ -1064,6 +1183,44 @@ function CVGenerator() {
                           {renderPreviewSection("Projects", formData.projects, "projects")}
                         </div>
                       </div>
+                    ) : selectedTemplate === "ats" ? (
+                      <>
+                        <header className="cv-document-header">
+                          <h2>{formData.fullName || "Your Name"}</h2>
+                          {formData.jobTitle && <p className="cv-document-job">{formData.jobTitle}</p>}
+                        </header>
+                        {renderContacts()}
+                        {renderPreviewSection("Professional Summary", formData.summary, "summary")}
+                        {renderPreviewSection("Experience & Internships", formData.experience, "experience")}
+                        {renderPreviewSection("Education", formData.education, "education")}
+                        {renderSkills()}
+                        {renderPreviewSection("Projects", formData.projects, "projects")}
+                      </>
+                    ) : selectedTemplate === "graduate" ? (
+                      <>
+                        <header className="cv-document-header">
+                          <h2>{formData.fullName || "Your Name"}</h2>
+                          {formData.jobTitle && <p className="cv-document-job">{formData.jobTitle}</p>}
+                        </header>
+                        {renderContacts()}
+                        {renderPreviewSection("Professional Summary", formData.summary, "summary")}
+                        {renderPreviewSection("Education", formData.education, "education")}
+                        {renderPreviewSection("Projects", formData.projects, "projects")}
+                        {renderSkills()}
+                        {renderPreviewSection("Experience & Internships", formData.experience, "experience")}
+                      </>
+                    ) : selectedTemplate === "software" ? (
+                      <>
+                        <header className="cv-document-header">
+                          <p className="cv-developer-kicker">SOFTWARE ENGINEER</p>
+                          <h2>{formData.fullName || "Your Name"}</h2>
+                          {formData.jobTitle && <p className="cv-document-job">{formData.jobTitle}</p>}
+                        </header>
+                        {renderContacts()}
+                        {renderPreviewSection("Professional Summary", formData.summary, "summary")}
+                        {renderSkills({ chips: true })}
+                        {renderStandardSections({ developer: true })}
+                      </>
                     ) : selectedTemplate === "minimal" ? (
                       <>
                         <header className="cv-document-header">
