@@ -62,21 +62,8 @@ function Navbar() {
               Home
             </NavLink>
 
-            <a
-              href="/#how-it-works"
-              className="nav-link"
-              onClick={closeMenu}
-            >
-              How It Works
-            </a>
+          
 
-            <a
-              href="/#career-tools"
-              className="nav-link"
-              onClick={closeMenu}
-            >
-              Career Tools
-            </a>
 
             <NavLink
               to="/careers"
@@ -103,6 +90,15 @@ function Navbar() {
                 CV Builder
               </NavLink>
             )}
+            {!loading && user && (
+  <NavLink
+    to="/resume-analyzer"
+    className={getNavLinkClass}
+    onClick={closeMenu}
+  >
+    ATS Resume Analyzer
+  </NavLink>
+)}
           </nav>
 
           {!loading && (

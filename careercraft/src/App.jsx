@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import CVGenerator from "./pages/CVGenerator";
 import JobApplicationTracker from "./pages/JobApplicationTracker";
+import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
 <Route
   path="/job-applications"
   element={<JobApplicationTracker />}
+/>
+<Route
+  path="/resume-analyzer"
+  element={<ResumeAnalyzer />}
 />
 </Route>
         </Routes>

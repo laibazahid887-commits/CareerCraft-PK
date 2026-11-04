@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -28,66 +29,27 @@ const careerSkills = {
   },
   uiux: {
     title: "UI/UX Designer",
-    skills: [
-      "Figma",
-      "Wireframing",
-      "Prototyping",
-      "Typography",
-      "User Research",
-    ],
+    skills: ["Figma", "Wireframing", "Prototyping", "Typography", "User Research"],
   },
   graphic: {
     title: "Graphic Designer",
-    skills: [
-      "Typography",
-      "Color Theory",
-      "Layout Design",
-      "Branding",
-      "Visual Communication",
-    ],
+    skills: ["Typography", "Color Theory", "Layout Design", "Branding", "Visual Communication"],
   },
   marketing: {
     title: "Digital Marketer",
-    skills: [
-      "SEO",
-      "Content Marketing",
-      "Social Media Marketing",
-      "Analytics",
-      "Campaign Planning",
-    ],
+    skills: ["SEO", "Content Marketing", "Social Media Marketing", "Analytics", "Campaign Planning"],
   },
   business: {
     title: "Business Analyst",
-    skills: [
-      "Analytical Thinking",
-      "Communication",
-      "Excel",
-      "Requirements Gathering",
-      "Data Interpretation",
-    ],
+    skills: ["Analytical Thinking", "Communication", "Excel", "Requirements Gathering", "Data Interpretation"],
   },
   education: {
     title: "Teacher",
-    skills: [
-      "Communication",
-      "Lesson Planning",
-      "Classroom Management",
-      "Subject Knowledge",
-      "Assessment",
-      "Teaching Methods",
-      "Student Engagement",
-      "Learning Materials",
-    ],
+    skills: ["Communication", "Lesson Planning", "Classroom Management", "Subject Knowledge", "Assessment", "Teaching Methods", "Student Engagement", "Learning Materials"],
   },
   technicalTraining: {
     title: "Technical Trainer",
-    skills: [
-      "Technical Knowledge",
-      "Presentation",
-      "Communication",
-      "Instructional Design",
-      "Problem Solving",
-    ],
+    skills: ["Technical Knowledge", "Presentation", "Communication", "Instructional Design", "Problem Solving"],
   },
 };
 
@@ -105,80 +67,18 @@ function getCareerKey(careerGoal) {
   if (!goal) return null;
 
   const careerMatchers = [
-    {
-      key: "frontend",
-      terms: [
-        "frontend",
-        "front end",
-        "react",
-        "html",
-        "css developer",
-        "web developer",
-        "web development",
-      ],
-    },
-    {
-      key: "backend",
-      terms: [
-        "backend",
-        "back end",
-        "node js",
-        "express js",
-        "api developer",
-        "server side developer",
-      ],
-    },
-    {
-      key: "uiux",
-      terms: [
-        "ui ux",
-        "ui designer",
-        "ux designer",
-        "user experience",
-        "user interface designer",
-        "product designer",
-      ],
-    },
-    {
-      key: "graphic",
-      terms: ["graphic designer", "graphic design", "visual designer"],
-    },
-    {
-      key: "marketing",
-      terms: [
-        "digital marketer",
-        "digital marketing",
-        "seo specialist",
-        "seo analyst",
-        "content marketer",
-        "social media marketer",
-      ],
-    },
-    {
-      key: "business",
-      terms: ["business analyst", "business analysis"],
-    },
-    {
-      key: "education",
-      terms: ["teacher", "educator", "school teacher"],
-    },
-    {
-      key: "technicalTraining",
-      terms: [
-        "technical trainer",
-        "technical training",
-        "it trainer",
-        "software trainer",
-      ],
-    },
+    { key: "frontend", terms: ["frontend", "front end", "react", "html", "css developer", "web developer", "web development"] },
+    { key: "backend", terms: ["backend", "back end", "node js", "express js", "api developer", "server side developer"] },
+    { key: "uiux", terms: ["ui ux", "ui designer", "ux designer", "user experience", "user interface designer", "product designer"] },
+    { key: "graphic", terms: ["graphic designer", "graphic design", "visual designer"] },
+    { key: "marketing", terms: ["digital marketer", "digital marketing", "seo specialist", "seo analyst", "content marketer", "social media marketer"] },
+    { key: "business", terms: ["business analyst", "business analysis"] },
+    { key: "education", terms: ["teacher", "educator", "school teacher"] },
+    { key: "technicalTraining", terms: ["technical trainer", "technical training", "it trainer", "software trainer"] },
   ];
 
   for (const career of careerMatchers) {
-    if (
-      career.terms.some(
-        (term) => goal === term || goal.includes(term)
-      )
-    ) {
+    if (career.terms.some((term) => goal === term || goal.includes(term))) {
       return career.key;
     }
   }
@@ -196,12 +96,9 @@ function readSavedSkills(careerKey) {
 
     if (!Array.isArray(saved)) return [];
 
-    const availableSkills = careerSkills[careerKey].skills;
-
-    return availableSkills.filter((skill) =>
-      saved.some(
-        (savedSkill) =>
-          normalizeText(savedSkill) === normalizeText(skill)
+    return careerSkills[careerKey].skills.filter((skill) =>
+      saved.some((savedSkill) =>
+        normalizeText(savedSkill) === normalizeText(skill)
       )
     );
   } catch {
@@ -323,17 +220,31 @@ function removeCareerActivity(activity) {
     if (index === -1) return false;
 
     saved.splice(index, 1);
-
-    localStorage.setItem(
-      ACTIVITY_STORAGE_KEY,
-      JSON.stringify(saved)
-    );
+    localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(saved));
 
     return true;
   } catch (error) {
     console.error("Unable to remove career activity:", error);
     return false;
   }
+}
+
+function ProgressBar({ percentage, label }) {
+  return (
+    <div
+      className="dashboard-progress-track"
+      role="progressbar"
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={percentage}
+    >
+      <div
+        className="dashboard-progress-fill"
+        style={{ width: `${percentage}%` }}
+      />
+    </div>
+  );
 }
 
 function Dashboard() {
@@ -373,6 +284,7 @@ function Dashboard() {
     }
 
     refreshActivities();
+
     window.addEventListener("focus", refreshActivities);
     window.addEventListener("pageshow", refreshActivities);
 
@@ -406,10 +318,6 @@ function Dashboard() {
   const completionPercentage = Math.round(
     (completedFields / profileFields.length) * 100
   );
-
-  const visibleActivities = showAllActivities
-    ? activities
-    : activities.slice(0, INITIAL_ACTIVITY_COUNT);
 
   const careerKey = getCareerKey(profile.career_goal);
   const career = careerKey ? careerSkills[careerKey] : null;
@@ -454,6 +362,10 @@ function Dashboard() {
         ? 100
         : null;
 
+  const visibleActivities = showAllActivities
+    ? activities
+    : activities.slice(0, INITIAL_ACTIVITY_COUNT);
+
   let nextAction;
 
   if (!profile.career_goal?.trim()) {
@@ -475,8 +387,7 @@ function Dashboard() {
   } else if (missingSkills.length > 0) {
     nextAction = {
       title: "Review your career skills",
-      description:
-        `${selectedSkills.length} of ${totalCareerSkills} skills are currently selected for ${career.title}. Review the remaining skills as you learn.`,
+      description: `${selectedSkills.length} of ${totalCareerSkills} skills are currently selected for ${career.title}. Review the remaining skills as you learn.`,
       link: `/skill-gap?career=${careerKey}`,
       label: "Review Skill Gaps",
     };
@@ -506,32 +417,115 @@ function Dashboard() {
     };
   }
 
+  const firstName =
+    user?.full_name?.trim()?.split(/\s+/)[0] || "there";
+
   return (
     <>
       <Navbar />
 
       <main className="dashboard-page">
         <div className="dashboard-container">
-          <section className="dashboard-welcome">
-            <div>
+
+          {/* Welcome hero */}
+          <section className="dashboard-hero">
+            <div className="dashboard-hero-content">
               <span className="dashboard-eyebrow">
-                YOUR CAREER WORKSPACE
+                YOUR PERSONAL CAREER SPACE
               </span>
 
               <h1>
-                Welcome back,{" "}
-                {user?.full_name?.trim()?.split(/\s+/)[0] || "there"}!
+                Welcome back, <span>{firstName}!</span>
               </h1>
 
               <p>
-                Keep building your skills, tracking your progress,
-                and preparing for your next career opportunity.
+                Your next opportunity starts with the progress you make
+                today. Keep learning, building, and moving forward.
               </p>
+
+              <div className="dashboard-hero-actions">
+                <Link to="/profile" className="dashboard-primary-button">
+                  View My Profile <span>→</span>
+                </Link>
+
+                <Link  to="/careers" className="dashboard-secondary-link">
+                  Explore Careers
+                </Link>
+              </div>
+
+              <div className="dashboard-hero-note">
+                <span className="dashboard-note-icon">✦</span>
+                <div>
+                  <strong>Small steps create big careers.</strong>
+                  <span>Stay consistent with your learning journey.</span>
+                </div>
+              </div>
             </div>
 
-            <Link to="/profile" className="dashboard-profile-button">
-              View My Profile →
-            </Link>
+            <div className="dashboard-hero-visual">
+              <div className="dashboard-visual-orbit dashboard-orbit-one" />
+              <div className="dashboard-visual-orbit dashboard-orbit-two" />
+
+              <div className="dashboard-career-preview">
+                <div className="dashboard-preview-top">
+                  <span className="dashboard-preview-icon">✦</span>
+                  <span className="dashboard-preview-status">
+                    YOUR CAREER OVERVIEW
+                  </span>
+                </div>
+
+                <span className="dashboard-preview-label">
+                  CURRENT CAREER GOAL
+                </span>
+
+                <h2>
+                  {loading
+                    ? "Loading..."
+                    : profile.career_goal || "Choose your direction"}
+                </h2>
+
+                <p>
+                  {profile.experience_level
+                    ? `${profile.experience_level} level`
+                    : "Your career journey starts here"}
+                </p>
+
+                <div className="dashboard-preview-divider" />
+
+                <div className="dashboard-preview-progress-heading">
+                  <span>Profile completion</span>
+                  <strong>
+                    {loading ? "—" : `${completionPercentage}%`}
+                  </strong>
+                </div>
+
+                <ProgressBar
+                  percentage={loading ? 0 : completionPercentage}
+                  label="Profile completion"
+                />
+
+                <div className="dashboard-preview-footer">
+                  <span>✧</span>
+                  {completedFields} of {profileFields.length} profile details added
+                </div>
+              </div>
+
+              <div className="dashboard-floating-card dashboard-floating-top">
+                <span className="dashboard-floating-icon">✓</span>
+                <div>
+                  <strong>Clear next steps</strong>
+                  <span>Build your career plan</span>
+                </div>
+              </div>
+
+              <div className="dashboard-floating-card dashboard-floating-bottom">
+                <span className="dashboard-floating-icon">↗</span>
+                <div>
+                  <strong>Keep progressing</strong>
+                  <span>One skill at a time</span>
+                </div>
+              </div>
+            </div>
           </section>
 
           {error && (
@@ -540,92 +534,81 @@ function Dashboard() {
             </p>
           )}
 
-          <section className="dashboard-overview">
-            <article className="dashboard-card dashboard-goal-card">
-              <span className="dashboard-card-label">
-                YOUR CAREER GOAL
-              </span>
-
-              {loading ? (
-                <h2>Loading...</h2>
-              ) : (
-                <h2>{profile.career_goal || "Set your career goal"}</h2>
-              )}
-
-              <p>
-                {profile.experience_level
-                  ? `${profile.experience_level} level`
-                  : "Add your experience level to personalize your journey."}
-              </p>
-
-              <Link to="/profile" className="dashboard-text-link">
-                {profile.career_goal
-                  ? "Update career goal"
-                  : "Set career goal"} →
-              </Link>
+          {/* Quick statistics */}
+          <section className="dashboard-stat-grid">
+            <article className="dashboard-stat-card">
+              <div className="dashboard-stat-icon stat-profile-icon">◎</div>
+              <div>
+                <span>Profile completion</span>
+                <strong>{loading ? "—" : `${completionPercentage}%`}</strong>
+                <small>Personal information</small>
+              </div>
             </article>
 
-            <article className="dashboard-card dashboard-completion-card">
-              <div className="dashboard-completion-heading">
-                <span className="dashboard-card-label">
-                  PROFILE COMPLETION
-                </span>
-
+            <article className="dashboard-stat-card">
+              <div className="dashboard-stat-icon stat-skill-icon">✳</div>
+              <div>
+                <span>Career skills</span>
                 <strong>
-                  {loading ? "—" : `${completionPercentage}%`}
+                  {loading || !career
+                    ? "—"
+                    : `${selectedSkills.length}/${totalCareerSkills}`}
                 </strong>
+                <small>Self-assessed skills</small>
               </div>
+            </article>
 
-              <div
-                className="dashboard-progress-track"
-                role="progressbar"
-                aria-label="Profile completion"
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={loading ? 0 : completionPercentage}
-              >
-                <div
-                  className="dashboard-progress-fill"
-                  style={{
-                    width: `${loading ? 0 : completionPercentage}%`,
-                  }}
-                />
+            <article className="dashboard-stat-card">
+              <div className="dashboard-stat-icon stat-roadmap-icon">▤</div>
+              <div>
+                <span>Roadmap progress</span>
+                <strong>
+                  {roadmapPercentage === null
+                    ? "—"
+                    : `${roadmapPercentage}%`}
+                </strong>
+                <small>
+                  {latestRoadmap ? "Latest learning roadmap" : "No roadmap recorded"}
+                </small>
               </div>
+            </article>
 
-              <p>
-                {loading
-                  ? "Checking your profile..."
-                  : `${completedFields} of ${profileFields.length} profile fields completed.`}
-              </p>
-
-              <Link to="/profile" className="dashboard-text-link">
-                Complete your profile →
-              </Link>
+            <article className="dashboard-stat-card">
+              <div className="dashboard-stat-icon stat-activity-icon">↗</div>
+              <div>
+                <span>Recent activities</span>
+                <strong>{activities.length}</strong>
+                <small>Career updates recorded</small>
+              </div>
             </article>
           </section>
 
-          <section className="dashboard-tools-section">
+          {/* Career progress */}
+          <section className="dashboard-main-section">
             <div className="dashboard-section-heading">
               <div>
                 <span className="dashboard-eyebrow">
                   YOUR LEARNING JOURNEY
                 </span>
-
                 <h2>Career Progress Overview</h2>
-
-                <p>
-                  See your selected skills and latest learning roadmap.
-                </p>
+                <p>Track your selected skills and latest learning roadmap.</p>
               </div>
+
+              <Link to="/skill-gap" className="dashboard-heading-link">
+                View all skills →
+              </Link>
             </div>
 
-            <div className="dashboard-tools-grid">
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon skill-tool-icon">
-                  ✳
-                </div>
+            <div className="dashboard-progress-grid">
 
-                <h3>Career Skills</h3>
+              <article className="dashboard-feature-card dashboard-skills-card">
+                <div className="dashboard-feature-heading">
+                  <div className="dashboard-feature-icon skill-tool-icon">✳</div>
+                  <div>
+                    <span className="dashboard-card-label">SKILL DEVELOPMENT</span>
+                    <h3>Career Skills</h3>
+                  </div>
+                </div>
 
                 {loading ? (
                   <p>Loading your career information...</p>
@@ -634,113 +617,116 @@ function Dashboard() {
                     <p>
                       {profile.career_goal
                         ? "Your career goal does not match a supported skill category yet."
-                        : "Set your career goal to see relevant skills."}
+                        : "Set your career goal to see the skills relevant to your career."}
                     </p>
-
-                    <Link to="/profile" className="dashboard-tool-link">
-                      {profile.career_goal
-                        ? "Review career goal"
-                        : "Set career goal"} →
+                    <Link to="/profile" className="dashboard-card-action">
+                      {profile.career_goal ? "Review career goal" : "Set career goal"} →
                     </Link>
                   </>
                 ) : (
                   <>
-                    <p>
-                      <strong>
-                        {selectedSkills.length}/{totalCareerSkills}
-                      </strong>{" "}
-                      skills selected
-                    </p>
-
-                    <div
-                      className="dashboard-progress-track"
-                      role="progressbar"
-                      aria-label="Self-assessed career skill coverage"
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-valuenow={skillPercentage}
-                    >
-                      <div
-                        className="dashboard-progress-fill"
-                        style={{ width: `${skillPercentage}%` }}
-                      />
+                    <div className="dashboard-feature-metric">
+                      <strong>{selectedSkills.length}</strong>
+                      <span>of {totalCareerSkills} skills selected</span>
                     </div>
 
-                    <p>{skillPercentage}% self-assessed coverage.</p>
+                    <ProgressBar
+                      percentage={skillPercentage}
+                      label="Self-assessed career skill coverage"
+                    />
+
+                    <div className="dashboard-progress-caption">
+                      <span>Self-assessed coverage</span>
+                      <strong>{skillPercentage}%</strong>
+                    </div>
+
+                    <div className="dashboard-skill-preview">
+                      {career.skills.map((skill) => {
+                        const isSelected = selectedSkills.includes(skill);
+
+                        return (
+                          <span
+                            key={skill}
+                            className={isSelected ? "skill-chip skill-chip-selected" : "skill-chip"}
+                          >
+                            <span>{isSelected ? "✓" : "+"}</span>
+                            {skill}
+                          </span>
+                        );
+                      })}
+                    </div>
 
                     <Link
                       to={`/skill-gap?career=${careerKey}`}
-                      className="dashboard-tool-link"
+                      className="dashboard-card-action"
                     >
-                      Review skills →
+                      Review skill gaps →
                     </Link>
                   </>
                 )}
               </article>
 
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon roadmap-tool-icon">
-                  ▤
+              <article className="dashboard-feature-card dashboard-roadmap-card">
+                <div className="dashboard-feature-heading">
+                  <div className="dashboard-feature-icon roadmap-tool-icon">▤</div>
+                  <div>
+                    <span className="dashboard-card-label">LEARNING PLAN</span>
+                    <h3>Learning Roadmap</h3>
+                  </div>
                 </div>
-
-                <h3>Learning Roadmap</h3>
 
                 {!latestRoadmap ? (
                   <>
+                    <div className="dashboard-empty-illustration">✧</div>
+                    <h4>Your roadmap is waiting</h4>
                     <p>
-                      No roadmap activity is recorded yet. Analyze a job
-                      description to get started.
+                      Analyze a job description to identify the skills you
+                      need and start building your learning plan.
                     </p>
-
-                    <Link
-                      to="/job-analyzer"
-                      className="dashboard-tool-link"
-                    >
+                    <Link to="/job-analyzer" className="dashboard-card-action">
                       Create a roadmap →
                     </Link>
                   </>
                 ) : (
                   <>
-                    <p>
-                      <strong>{roadmapTitle}</strong>
-                    </p>
+                    <span className="dashboard-roadmap-role">
+                      {roadmapTitle}
+                    </span>
 
-                    {roadmapCompany && <p>Company: {roadmapCompany}</p>}
-
-                    {roadmapPercentage !== null ? (
-                      <>
-                        <p>
-                          {completedRoadmapCount}/{roadmapTotal} steps
-                          completed
-                        </p>
-
-                        <div
-                          className="dashboard-progress-track"
-                          role="progressbar"
-                          aria-label="Learning roadmap completion"
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                          aria-valuenow={roadmapPercentage}
-                        >
-                          <div
-                            className="dashboard-progress-fill"
-                            style={{
-                              width: `${roadmapPercentage}%`,
-                            }}
-                          />
-                        </div>
-
-                        <p>{roadmapPercentage}% complete.</p>
-                      </>
-                    ) : (
-                      <p>
-                        {completedRoadmapCount} completed steps recorded.
-                        Total steps are unavailable.
+                    {roadmapCompany && (
+                      <p className="dashboard-roadmap-company">
+                        Company: {roadmapCompany}
                       </p>
                     )}
 
-                    <Link to="/roadmap" className="dashboard-tool-link">
-                      Open roadmap →
+                    <div className="dashboard-feature-metric">
+                      <strong>{completedRoadmapCount}</strong>
+                      <span>
+                        {roadmapTotal !== null
+                          ? `of ${roadmapTotal} steps completed`
+                          : "completed steps recorded"}
+                      </span>
+                    </div>
+
+                    {roadmapPercentage !== null ? (
+                      <>
+                        <ProgressBar
+                          percentage={roadmapPercentage}
+                          label="Learning roadmap completion"
+                        />
+                        <div className="dashboard-progress-caption">
+                          <span>Roadmap completion</span>
+                          <strong>{roadmapPercentage}%</strong>
+                        </div>
+                      </>
+                    ) : (
+                      <p className="dashboard-roadmap-note">
+                        Total roadmap steps are currently unavailable.
+                      </p>
+                    )}
+
+                    <Link to="/roadmap" className="dashboard-card-action">
+                      Continue learning →
                     </Link>
                   </>
                 )}
@@ -748,153 +734,111 @@ function Dashboard() {
             </div>
           </section>
 
-          <section className="dashboard-tools-section">
+          {/* Career tools */}
+          <section className="dashboard-main-section">
             <div className="dashboard-section-heading">
               <div>
-                <span className="dashboard-eyebrow">
-                  TAKE YOUR NEXT STEP
-                </span>
-
-                <h2>Your Career Tools</h2>
-
-                <p>
-                  Choose a tool to continue your career preparation.
-                </p>
+                <span className="dashboard-eyebrow">TOOLS FOR YOUR FUTURE</span>
+                <h2>Your Career Workspace</h2>
+                <p>Everything you need to prepare for your next opportunity.</p>
               </div>
             </div>
 
             <div className="dashboard-tools-grid">
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon skill-tool-icon">
-                  ✳
-                </div>
 
+              <Link to="/skill-gap" className="dashboard-tool-card">
+                <div className="dashboard-tool-icon skill-tool-icon">✳</div>
+                <span className="dashboard-tool-number">01</span>
                 <h3>Skill Gap Analysis</h3>
+                <p>Discover the skills you already have and identify what you need to improve.</p>
+                <span className="dashboard-tool-link">Explore skills <span>→</span></span>
+              </Link>
 
-                <p>
-                  Find skills to develop for your target career.
-                </p>
-
-                <Link to="/skill-gap" className="dashboard-tool-link">
-                  Explore skills →
-                </Link>
-              </article>
-
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon analyzer-tool-icon">
-                  ↗
-                </div>
-
+              <Link to="/job-analyzer" className="dashboard-tool-card">
+                <div className="dashboard-tool-icon analyzer-tool-icon">↗</div>
+                <span className="dashboard-tool-number">02</span>
                 <h3>Job Analyzer</h3>
+                <p>Analyze job descriptions and understand the skills employers expect.</p>
+                <span className="dashboard-tool-link">Analyze a job <span>→</span></span>
+              </Link>
 
-                <p>
-                  Identify skills required for a job opportunity.
-                </p>
+              <Link to="/roadmap" className="dashboard-tool-card">
+                <div className="dashboard-tool-icon roadmap-tool-icon">▤</div>
+                <span className="dashboard-tool-number">03</span>
+                <h3>Learning Roadmap</h3>
+                <p>Follow structured learning steps and keep track of your progress.</p>
+                <span className="dashboard-tool-link">Open roadmap <span>→</span></span>
+              </Link>
 
-                <Link to="/job-analyzer" className="dashboard-tool-link">
-                  Analyze a job →
-                </Link>
-              </article>
-
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon roadmap-tool-icon">
-                  ▤
-                </div>
-
+              <Link to="/job-applications" className="dashboard-tool-card">
+                <div className="dashboard-tool-icon application-tool-icon">▣</div>
+                <span className="dashboard-tool-number">04</span>
                 <h3>Job Application Tracker</h3>
+                <p>Manage job applications, update statuses, and organize interview details.</p>
+                <span className="dashboard-tool-link">Track applications <span>→</span></span>
+              </Link>
 
-                <p>
-                  Track applications, update statuses, and manage interview
-                  dates and notes.
-                </p>
-
-                <Link
-                  to="/job-applications"
-                  className="dashboard-tool-link"
-                >
-                  Track applications →
-                </Link>
-              </article>
-
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon profile-tool-icon">
-                  ◎
-                </div>
-
+              <Link to="/cv-generator" className="dashboard-tool-card">
+                <div className="dashboard-tool-icon cv-tool-icon">▧</div>
+                <span className="dashboard-tool-number">05</span>
                 <h3>CV Builder</h3>
+                <p>Create a professional CV that highlights your skills and experience.</p>
+                <span className="dashboard-tool-link">Build my CV <span>→</span></span>
+              </Link>
 
-                <p>
-                  Create a professional CV tailored to your career goals.
-                </p>
-
-                <Link
-                  to="/cv-generator"
-                  className="dashboard-tool-link"
-                >
-                  Build my CV →
-                </Link>
-              </article>
-
-              <article className="dashboard-tool-card">
-                <div className="dashboard-tool-icon profile-tool-icon">
-                  ◎
-                </div>
-
+              <Link to="/profile" className="dashboard-tool-card">
+                <div className="dashboard-tool-icon profile-tool-icon">◎</div>
+                <span className="dashboard-tool-number">06</span>
                 <h3>Career Profile</h3>
-
-                <p>
-                  Update your education, experience, and career goal.
-                </p>
-
-                <Link to="/profile" className="dashboard-tool-link">
-                  Update profile →
-                </Link>
-              </article>
+                <p>Keep your education, experience, location, and career goal updated.</p>
+                <span className="dashboard-tool-link">Update profile <span>→</span></span>
+              </Link>
             </div>
           </section>
 
+          {/* Recommended next step */}
           {!loading && (
             <section className="dashboard-next-step">
-              <div>
+              <div className="dashboard-next-step-content">
                 <span className="dashboard-eyebrow">
-                  RECOMMENDED NEXT STEP
+                  YOUR RECOMMENDED NEXT STEP
                 </span>
-
                 <h2>{nextAction.title}</h2>
                 <p>{nextAction.description}</p>
+                <Link
+                  to={nextAction.link}
+                  className="dashboard-primary-button"
+                >
+                  {nextAction.label} <span>→</span>
+                </Link>
               </div>
 
-              <Link
-                to={nextAction.link}
-                className="dashboard-profile-button"
-              >
-                {nextAction.label} →
-              </Link>
+              <div className="dashboard-next-step-decoration">
+                <span>✦</span>
+                <span>↗</span>
+              </div>
             </section>
           )}
 
+          {/* Recent activity */}
           <section className="dashboard-activity-section">
             <div className="dashboard-section-heading">
               <div>
-                <span className="dashboard-eyebrow">
-                  YOUR RECENT PROGRESS
-                </span>
-
+                <span className="dashboard-eyebrow">YOUR RECENT PROGRESS</span>
                 <h2>Recent Activity</h2>
-
-                <p>Review or remove your recent career updates.</p>
+                <p>Keep an eye on the work you have completed.</p>
               </div>
             </div>
 
             {activities.length === 0 ? (
               <div className="dashboard-activity-empty">
-                <h3>No recent activity</h3>
-
+                <div className="dashboard-empty-illustration">✧</div>
+                <h3>Your activity will appear here</h3>
                 <p>
-                  Your job analyses and learning updates will appear here.
+                  Your job analyses and learning updates will be recorded
+                  here as you use CareerCraft PK.
                 </p>
-
-                <Link to="/job-analyzer" className="dashboard-tool-link">
+                <Link to="/job-analyzer" className="dashboard-card-action">
                   Analyze your first job →
                 </Link>
               </div>
@@ -916,10 +860,7 @@ function Dashboard() {
                       <div className="dashboard-activity-details">
                         <div className="dashboard-activity-heading">
                           <div>
-                            <h3>
-                              {getActivityDescription(activity)}
-                            </h3>
-
+                            <h3>{getActivityDescription(activity)}</h3>
                             <p className="dashboard-activity-title">
                               {activity.title || "Career development"}
                             </p>
@@ -945,9 +886,7 @@ function Dashboard() {
                           {typeof activity.skillCount === "number" && (
                             <span>
                               {activity.skillCount}{" "}
-                              {activity.skillCount === 1
-                                ? "skill"
-                                : "skills"}
+                              {activity.skillCount === 1 ? "skill" : "skills"}
                             </span>
                           )}
                         </div>
