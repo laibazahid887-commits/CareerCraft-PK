@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { generateRoadmap } from "../services/roadmapService";
 import "./Roadmap.css";
 
@@ -165,7 +164,6 @@ function Roadmap() {
 
   return (
     <>
-      <Navbar />
 
       <main className="roadmap-page">
         <div className="roadmap-container">

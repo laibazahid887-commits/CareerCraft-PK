@@ -1,6 +1,5 @@
 
 import { useParams, Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import "./CareerDetails.css";
 
 const careers = [
@@ -248,7 +247,6 @@ function CareerDetails() {
   if (!career) {
     return (
       <>
-        <Navbar />
         <main className="career-details-page">
           <div className="career-details-container career-not-found">
             <h1>Career not found</h1>
@@ -264,7 +262,6 @@ function CareerDetails() {
 
   return (
     <>
-      <Navbar />
 
       <main className="career-details-page">
         <div className="career-details-container">

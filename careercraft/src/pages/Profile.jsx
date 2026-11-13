@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProfile, updateProfile } from "../services/profileService";
 import { useAuth } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
 import "./Profile.css";
 
 const initialFormData = {
@@ -89,7 +88,6 @@ function Profile() {
   if (loading) {
     return (
       <main className="profile-page">
-        <Navbar />
         <p className="profile-status">Loading your profile...</p>
       </main>
     );
@@ -97,7 +95,6 @@ function Profile() {
 
   return (
     <>
-      <Navbar />
 
       <main className="profile-page">
         <section className="profile-container">

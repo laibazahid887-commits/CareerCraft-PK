@@ -1,0 +1,1251 @@
+
+/* =========================================
+   INTERVIEW STUDIO - MAIN PAGE
+========================================= */
+
+.interview-page {
+  min-height: 100vh;
+  padding: 40px 24px 60px;
+  background:
+    radial-gradient(circle at 8% 5%, rgba(15, 169, 155, 0.08), transparent 28%),
+    linear-gradient(135deg, #f4f7fb, #edf2f7);
+}
+
+.interview-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.interview-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 280px;
+  padding: 42px 48px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #14243f, #1b3b59 58%, #087f83);
+  color: #ffffff;
+  box-shadow: 0 14px 35px rgba(20, 36, 63, 0.16);
+}
+
+.interview-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+}
+
+.interview-eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0b8f89;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.interview-hero .interview-eyebrow {
+  color: #8ee5dc;
+}
+
+.interview-hero h1 {
+  margin: 0 0 14px;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.interview-hero p {
+  max-width: 560px;
+  margin: 0 0 25px;
+  color: #dce8f1;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.interview-primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 13px 21px;
+  border: none;
+  border-radius: 9px;
+  background: #12a99c;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.interview-primary-button:hover {
+  background: #0d9188;
+  transform: translateY(-2px);
+}
+
+.interview-primary-button span {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.interview-primary-button:disabled,
+.interview-close-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.interview-hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 230px;
+  min-height: 190px;
+}
+
+.interview-visual-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 18px rgba(255, 255, 255, 0.04);
+}
+
+.interview-visual-circle span {
+  font-size: 65px;
+}
+
+.interview-floating-note {
+  position: absolute;
+  right: -8px;
+  bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(20, 36, 63, 0.85);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+}
+
+.interview-floating-note strong {
+  font-size: 13px;
+}
+
+.interview-floating-note span {
+  color: #c9d9e5;
+  font-size: 11px;
+}
+
+/* =========================================
+   ERROR AND SUCCESS MESSAGES
+========================================= */
+
+.interview-error {
+  margin-top: 22px;
+  padding: 13px 16px;
+  border: 1px solid #f2c6c6;
+  border-radius: 10px;
+  background: #fff1f1;
+  color: #a83232;
+  font-size: 14px;
+}
+
+.interview-success {
+  margin-top: 22px;
+  padding: 20px 22px;
+  border: 1px solid #bce5d2;
+  border-radius: 12px;
+  background: #effaf4;
+  color: #18794e;
+}
+
+.interview-success h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.interview-success p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   DASHBOARD STATISTICS
+========================================= */
+
+.interview-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.interview-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 105px;
+  padding: 20px;
+  border: 1px solid #e2e9f0;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(23, 43, 77, 0.045);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interview-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(23, 43, 77, 0.09);
+}
+
+.interview-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #e8f6f4;
+  color: #087f83;
+  font-size: 23px;
+}
+
+.interview-stat-card div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.interview-stat-card span {
+  color: #748197;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.interview-stat-card strong {
+  color: #172b4d;
+  font-size: 25px;
+  line-height: 1;
+}
+
+/* =========================================
+   COMMON SECTION STYLING
+========================================= */
+
+.interview-section {
+  margin-top: 38px;
+}
+
+.interview-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.interview-section-heading h2 {
+  margin: 0 0 7px;
+  color: #172b4d;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.interview-section-heading p {
+  margin: 0;
+  color: #748197;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   PREPARATION WORKSPACE
+========================================= */
+
+.interview-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.interview-workspace-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 300px;
+  padding: 23px;
+  border: 1px solid #e2e9f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(23, 43, 77, 0.045);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.interview-workspace-card:hover {
+  transform: translateY(-4px);
+  border-color: #c8e6e2;
+  box-shadow: 0 12px 28px rgba(23, 43, 77, 0.09);
+}
+
+.interview-workspace-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 21px;
+}
+
+.interview-workspace-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 13px;
+  background: #e8f6f4;
+  font-size: 23px;
+}
+
+.interview-feature-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.interview-feature-status.available {
+  background: #e6f6ef;
+  color: #18794e;
+}
+
+.interview-feature-status.planned {
+  background: #edf2f7;
+  color: #68778b;
+}
+
+.interview-workspace-card h3 {
+  margin: 0 0 10px;
+  color: #172b4d;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.interview-workspace-card > p {
+  margin: 0 0 19px;
+  color: #748197;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.interview-workspace-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: auto;
+  padding: 13px 14px;
+  border: 1px solid #e8eef2;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.interview-workspace-detail strong {
+  color: #344861;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.interview-workspace-detail span {
+  color: #8793a5;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.interview-workspace-link {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 9px;
+  margin-top: 17px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #087f83;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.interview-workspace-link:hover {
+  gap: 14px;
+  color: #12a99c;
+}
+
+.interview-workspace-link span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.interview-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 245px;
+  padding: 30px 20px;
+  border: 1px dashed #cbd7e2;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  text-align: center;
+}
+
+.interview-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: #e8f6f4;
+  font-size: 27px;
+}
+
+.interview-empty-state h3 {
+  margin: 0 0 8px;
+  color: #172b4d;
+  font-size: 18px;
+}
+
+.interview-empty-state p {
+  max-width: 430px;
+  margin: 0;
+  color: #748197;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.interview-empty-state .interview-primary-button {
+  margin-top: 20px;
+}
+
+/* =========================================
+   RECENT INTERVIEW SESSIONS
+========================================= */
+
+.interview-session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.interview-session-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 22px;
+  border: 1px solid #e2e9f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(23, 43, 77, 0.04);
+}
+
+.interview-session-card h3 {
+  margin: 0 0 7px;
+  color: #172b4d;
+  font-size: 16px;
+}
+
+.interview-session-card p {
+  margin: 0 0 7px;
+  color: #53647a;
+  font-size: 13px;
+}
+
+.interview-session-card div > span {
+  color: #8793a5;
+  font-size: 12px;
+}
+
+.interview-status {
+  flex-shrink: 0;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #edf2f7;
+  color: #53647a;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.interview-status-completed {
+  background: #e6f6ef;
+  color: #18794e;
+}
+
+.interview-status-in_progress {
+  background: #fff4df;
+  color: #986515;
+}
+
+/* =========================================
+   LOADING STATE
+========================================= */
+
+.interview-loading {
+  padding: 60px 20px;
+  color: #53647a;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* =========================================
+   INTERVIEW SETUP FORM
+========================================= */
+
+.interview-setup {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px solid #e2e9f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 22px rgba(23, 43, 77, 0.06);
+  animation: interviewSetupFade 0.25s ease;
+}
+
+.interview-setup .interview-section-heading {
+  margin-bottom: 25px;
+}
+
+.interview-close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e2e9f0;
+  border-radius: 9px;
+  background: #f4f7fb;
+  color: #53647a;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.interview-close-button:hover {
+  background: #feecec;
+  border-color: #f2c6c6;
+  color: #c03939;
+}
+
+.interview-setup-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.interview-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.interview-form-group label {
+  color: #172b4d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.interview-form-group select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid #dce5ed;
+  border-radius: 9px;
+  outline: none;
+  background: #f9fbfd;
+  color: #172b4d;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interview-form-group select:focus {
+  border-color: #0fa99b;
+  box-shadow: 0 0 0 3px rgba(15, 169, 155, 0.12);
+}
+
+.interview-form-actions {
+  display: flex;
+  justify-content: flex-start;
+  grid-column: 1 / -1;
+  margin-top: 5px;
+}
+
+@keyframes interviewSetupFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   INTERVIEW PRACTICE SCREEN
+========================================= */
+
+.interview-practice {
+  margin-top: 28px;
+  padding: 30px;
+  border: 1px solid #e2e9f0;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(23, 43, 77, 0.06);
+  animation: interviewSetupFade 0.25s ease;
+}
+
+.interview-practice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #e9eef3;
+}
+
+.interview-practice-header h2 {
+  margin: 0 0 7px;
+  color: #172b4d;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.interview-practice-header p {
+  margin: 0;
+  color: #748197;
+  font-size: 14px;
+}
+
+.interview-practice-header .interview-close-button {
+  width: auto;
+  height: auto;
+  min-height: 40px;
+  padding: 9px 15px;
+  background: #fff5f0;
+  border-color: #f3d8ca;
+  color: #a64d2e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.interview-practice-header .interview-close-button:hover {
+  background: #fee9df;
+}
+
+/* =========================================
+   QUESTION PROGRESS
+========================================= */
+
+.interview-question-progress {
+  margin: 25px 0;
+}
+
+.interview-question-progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.interview-question-progress-info span {
+  color: #53647a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.interview-question-progress-info strong {
+  color: #087f83;
+  font-size: 14px;
+}
+
+.interview-progress-track {
+  width: 100%;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e9eff3;
+}
+
+.interview-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #087f83, #12a99c);
+  transition: width 0.3s ease;
+}
+
+/* =========================================
+   QUESTION CARD
+========================================= */
+
+.interview-question-card {
+  padding: 26px;
+  border: 1px solid #e2e9f0;
+  border-radius: 15px;
+  background: #f9fbfd;
+}
+
+.interview-question-label {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: #087f83;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.interview-question-card h3 {
+  margin: 0 0 25px;
+  color: #172b4d;
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+/* =========================================
+   ANSWER TEXTAREA
+========================================= */
+
+.interview-form-group textarea {
+  width: 100%;
+  min-height: 170px;
+  padding: 15px;
+  border: 1px solid #dce5ed;
+  border-radius: 10px;
+  outline: none;
+  resize: vertical;
+  background: #ffffff;
+  color: #172b4d;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interview-form-group textarea::placeholder {
+  color: #98a4b3;
+}
+
+.interview-form-group textarea:focus {
+  border-color: #0fa99b;
+  box-shadow: 0 0 0 3px rgba(15, 169, 155, 0.12);
+}
+
+.interview-form-group textarea:disabled {
+  background: #f1f5f8;
+  color: #53647a;
+  cursor: not-allowed;
+}
+
+.interview-question-card form > .interview-primary-button {
+  margin-top: 20px;
+}
+
+/* =========================================
+   ANSWER FEEDBACK
+========================================= */
+
+.interview-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 24px;
+  animation: interviewSetupFade 0.25s ease;
+}
+
+.interview-feedback-section,
+.interview-suggested-answer,
+.interview-explanation {
+  padding: 23px;
+  border: 1px solid #e2e9f0;
+  border-radius: 13px;
+  background: #ffffff;
+}
+
+.interview-feedback-section {
+  border-left: 4px solid #087f83;
+  background: #f2faf9;
+}
+
+.interview-feedback h3 {
+  margin: 0 0 12px;
+  color: #172b4d;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.interview-feedback p {
+  margin: 0;
+  color: #53647a;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.interview-feedback-section small {
+  display: block;
+  margin-top: 12px;
+  color: #748197;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.interview-suggested-answer {
+  border-left: 4px solid #12a99c;
+  background: #f7fbfc;
+}
+
+.interview-explanation {
+  border-left: 4px solid #7b91ad;
+  background: #f8f9fc;
+}
+
+/* =========================================
+   PRACTICE ACTIONS
+========================================= */
+
+.interview-practice-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.interview-practice-actions .interview-primary-button {
+  min-width: 165px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 950px) {
+  .interview-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .interview-workspace-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .interview-hero {
+    padding: 36px;
+  }
+
+  .interview-hero-visual {
+    flex-basis: 190px;
+  }
+}
+
+@media (max-width: 700px) {
+  .interview-page {
+    padding: 25px 16px 45px;
+  }
+
+  .interview-hero {
+    min-height: auto;
+    padding: 30px 25px;
+  }
+
+  .interview-hero-visual {
+    display: none;
+  }
+
+  .interview-hero h1 {
+    font-size: 31px;
+  }
+
+  .interview-section-heading h2 {
+    font-size: 20px;
+  }
+
+  .interview-practice {
+    padding: 22px;
+  }
+
+  .interview-practice-header {
+    align-items: flex-start;
+  }
+
+  .interview-practice-header h2 {
+    font-size: 21px;
+  }
+
+  .interview-question-card {
+    padding: 20px;
+  }
+
+  .interview-question-card h3 {
+    font-size: 18px;
+  }
+
+  .interview-feedback-section,
+  .interview-suggested-answer,
+  .interview-explanation {
+    padding: 19px;
+  }
+}
+
+@media (max-width: 600px) {
+  .interview-setup {
+    padding: 20px;
+  }
+
+  .interview-setup-form {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .interview-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .interview-stat-card {
+    min-height: 88px;
+  }
+
+  .interview-workspace-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .interview-workspace-card {
+    min-height: 270px;
+    padding: 20px;
+  }
+
+  .interview-hero {
+    padding: 27px 21px;
+    border-radius: 16px;
+  }
+
+  .interview-hero h1 {
+    font-size: 27px;
+  }
+
+  .interview-hero p {
+    font-size: 13px;
+  }
+
+  .interview-session-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .interview-practice {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .interview-practice-header {
+    flex-direction: column;
+  }
+
+  .interview-practice-header .interview-close-button {
+    align-self: flex-start;
+  }
+
+  .interview-question-card {
+    padding: 16px;
+  }
+
+  .interview-question-card h3 {
+    font-size: 17px;
+  }
+
+  .interview-form-group textarea {
+    min-height: 150px;
+    font-size: 13px;
+  }
+
+  .interview-practice-actions {
+    justify-content: stretch;
+  }
+
+  .interview-practice-actions .interview-primary-button {
+    width: 100%;
+  }
+
+  .interview-form-actions .interview-primary-button {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   INTERVIEW STUDIO - DASHBOARD ENHANCEMENTS
+========================================= */
+
+/* Hero heading highlight */
+.interview-hero h1 span {
+  color: #8ee5dc;
+}
+
+/* Hero confidence note */
+.interview-hero-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 22px;
+  color: #dce8f1;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.interview-hero-note-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: rgba(142, 229, 220, 0.18);
+  color: #8ee5dc;
+  font-size: 12px;
+}
+
+/* Statistics section */
+.interview-stats-section {
+  margin-top: 30px;
+}
+
+.interview-stats-heading {
+  margin-bottom: 16px;
+}
+
+.interview-stats-heading .interview-eyebrow {
+  margin-bottom: 7px;
+}
+
+.interview-stats-heading h2 {
+  margin: 0;
+  color: #172b4d;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.interview-stats-grid {
+  margin-top: 0;
+}
+
+.interview-stat-card {
+  align-items: flex-start;
+  min-height: 125px;
+  padding: 22px 20px;
+}
+
+.interview-stat-icon {
+  flex-shrink: 0;
+}
+
+.interview-stat-icon-1 {
+  background: #e8f6f4;
+  color: #087f83;
+}
+
+.interview-stat-icon-2 {
+  background: #e8f6ed;
+  color: #218653;
+}
+
+.interview-stat-icon-3 {
+  background: #fff4df;
+  color: #b47b19;
+}
+
+.interview-stat-icon-4 {
+  background: #eef0ff;
+  color: #6268bd;
+}
+
+.interview-stat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.interview-stat-content > span {
+  color: #748197;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.interview-stat-content strong {
+  color: #172b4d;
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.interview-stat-content small {
+  color: #94a0af;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Workspace cards */
+.interview-workspace-card {
+  min-height: 315px;
+  padding: 24px;
+}
+
+.interview-card-available {
+  border-top: 3px solid #12a99c;
+}
+
+.interview-card-planned {
+  border-top: 3px solid #dce5ed;
+}
+
+.interview-workspace-card:hover {
+  border-color: #c8e6e2;
+}
+
+.interview-card-planned:hover {
+  border-color: #dce5ed;
+}
+
+/* Recent session card layout */
+.interview-session-card {
+  min-height: 100px;
+}
+
+.interview-session-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.interview-session-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #e8f6f4;
+  font-size: 21px;
+}
+
+.interview-session-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.interview-session-info h3 {
+  margin: 0 0 6px;
+}
+
+.interview-session-info p {
+  margin: 0 0 6px;
+}
+
+.interview-session-info > span {
+  color: #8793a5;
+  font-size: 12px;
+}
+
+/* Recent sessions spacing */
+.interview-recent-section {
+  margin-bottom: 15px;
+}
+
+/* =========================================
+   DASHBOARD RESPONSIVE ADJUSTMENTS
+========================================= */
+
+@media (max-width: 950px) {
+  .interview-stat-card {
+    min-height: 115px;
+  }
+}
+
+@media (max-width: 700px) {
+  .interview-hero-note {
+    margin-top: 17px;
+  }
+
+  .interview-stats-section {
+    margin-top: 24px;
+  }
+
+  .interview-workspace-card {
+    min-height: 295px;
+  }
+}
+
+@media (max-width: 480px) {
+  .interview-stat-card {
+    min-height: 100px;
+    padding: 17px;
+  }
+
+  .interview-stat-content strong {
+    font-size: 24px;
+  }
+
+  .interview-session-main {
+    align-items: flex-start;
+  }
+
+  .interview-session-card {
+    gap: 14px;
+    padding: 17px;
+  }
+
+  .interview-workspace-card {
+    min-height: 270px;
+  }
+}
+

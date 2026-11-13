@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import { getProfile } from "../services/profileService";
 import "./Dashboard.css";
@@ -422,7 +421,6 @@ function Dashboard() {
 
   return (
     <>
-      <Navbar />
 
       <main className="dashboard-page">
         <div className="dashboard-container">

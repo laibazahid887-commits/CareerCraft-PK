@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import "./SkillGap.css";
 
 const careerSkills = {
@@ -212,7 +211,6 @@ function SkillGap() {
 
   return (
     <>
-      <Navbar />
 
       <main className="skill-gap-page">
         <div className="skill-gap-container">

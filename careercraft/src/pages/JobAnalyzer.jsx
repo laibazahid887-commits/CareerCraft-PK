@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { analyzeJobDescription } from "../services/jobAnalyzerService";
 import { createApplication } from "../services/jobApplicationService";
 import "./JobAnalyzer.css";
@@ -336,7 +335,6 @@ async function handleSaveToTracker() {
 
   return (
     <>
-      <Navbar />
 
       <main className="job-analyzer-page">
         <div className="job-analyzer-container">

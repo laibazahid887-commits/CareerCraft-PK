@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import "./Careers.css";
 
 const careers = [
@@ -108,7 +107,6 @@ function Careers() {
 
   return (
     <>
-      <Navbar />
 
       <main className="careers-page">
         <section className="careers-hero">

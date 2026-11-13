@@ -10,6 +10,7 @@ const userRoutes = require("./routes/userRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const jobApplicationRoutes = require("./routes/jobApplicationRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
+const interviewRoutes = require("./routes/interviewRoutes");
 
 // Allow requests from the React frontend
 app.use(
@@ -24,6 +25,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/job-applications", jobApplicationRoutes);
 app.use("/api/resume", resumeRoutes);
+app.use("/api/interviews", interviewRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to CareerCraft PK Backend!");

@@ -5,7 +5,6 @@ import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
-import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import { getProfile } from "../services/profileService";
 import "./CVGenerator.css";
@@ -806,9 +805,7 @@ function CVGenerator() {
 
   return (
     <>
-      <Navbar />
-
-      <main className="cv-page">
+<main className="cv-page">
         <div className="cv-container">
           <header className="cv-heading">
             <div>

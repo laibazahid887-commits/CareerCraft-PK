@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 import { analyzeResume } from "../services/resumeService";
 import "./ResumeAnalyzer.css";
 
@@ -170,7 +169,6 @@ function ResumeAnalyzer() {
 
   return (
     <>
-      <Navbar />
 
       <main className="resume-analyzer-page">
         <div className="resume-analyzer-container">

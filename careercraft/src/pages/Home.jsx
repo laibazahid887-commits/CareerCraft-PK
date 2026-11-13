@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import "./Home.css";
 
 const careerTools = [
@@ -72,7 +71,6 @@ const careerCategories = [
 function Home() {
   return (
     <>
-      <Navbar />
 
       <main className="home-page">
         {/* Hero */}
