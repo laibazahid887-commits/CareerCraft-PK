@@ -1,0 +1,250 @@
+
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 88px;
+  padding: 16px 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4edf3;
+}
+
+/* Left section */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.topbar-heading p {
+  margin: 0 0 5px;
+  color: #8296a8;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.topbar-heading h1 {
+  margin: 0;
+  color: #102a43;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Mobile menu button */
+.topbar-menu-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 8px;
+  border: 1px solid #d5e2ea;
+  border-radius: 9px;
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.topbar-menu-button:hover {
+  background: #f0fdfa;
+  border-color: #00bfa6;
+}
+
+.topbar-menu-button span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: #102a43;
+}
+
+.topbar-menu-button:focus-visible {
+  outline: 2px solid #00bfa6;
+  outline-offset: 3px;
+}
+
+/* User section */
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+}
+
+.topbar-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  text-align: right;
+}
+
+.topbar-user-info strong {
+  overflow: hidden;
+  color: #102a43;
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+.topbar-user-info span {
+  overflow: hidden;
+  color: #8296a8;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+.topbar-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 2px solid #c7f7ee;
+  border-radius: 50%;
+  background: #e3faf5;
+  color: #008f7c;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* Action buttons */
+.topbar-profile-button,
+.topbar-logout-button {
+  min-height: 36px;
+  padding: 8px 13px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.topbar-profile-button {
+  border: 1px solid #d5e2ea;
+  background: #ffffff;
+  color: #486581;
+}
+
+.topbar-profile-button:hover {
+  border-color: #00bfa6;
+  background: #f0fdfa;
+  color: #008f7c;
+}
+
+.topbar-logout-button {
+  border: 1px solid #f0d6d6;
+  background: #fff7f7;
+  color: #c04444;
+}
+
+.topbar-logout-button:hover {
+  background: #ffe9e9;
+}
+
+.topbar-profile-button:focus-visible,
+.topbar-logout-button:focus-visible {
+  outline: 2px solid #00bfa6;
+  outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .dashboard-topbar {
+    padding: 16px 24px;
+  }
+
+  .topbar-user {
+    gap: 9px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dashboard-topbar {
+    min-height: 76px;
+    padding: 14px 18px;
+  }
+
+  .topbar-menu-button {
+    display: flex;
+  }
+
+  .topbar-heading h1 {
+    font-size: 19px;
+  }
+
+  .topbar-heading p {
+    font-size: 10px;
+  }
+
+  .topbar-user-info {
+    display: none;
+  }
+
+  .topbar-user {
+    gap: 9px;
+  }
+
+  .topbar-avatar {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .dashboard-topbar {
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .topbar-left {
+    gap: 10px;
+  }
+
+  .topbar-heading h1 {
+    font-size: 17px;
+  }
+
+  .topbar-heading p {
+    font-size: 9px;
+  }
+
+  .topbar-profile-button,
+  .topbar-logout-button {
+    min-height: 33px;
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .topbar-user {
+    gap: 7px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .topbar-menu-button,
+  .topbar-profile-button,
+  .topbar-logout-button {
+    transition: none;
+  }
+}

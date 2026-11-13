@@ -1,0 +1,241 @@
+
+.dashboard-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 270px;
+  height: 100vh;
+  min-height: 100vh;
+  padding: 28px 18px 20px;
+  overflow-y: auto;
+  background: #102a43;
+  color: #ffffff;
+  scrollbar-width: thin;
+  scrollbar-color: #486581 #102a43;
+  z-index: 10;
+}
+
+/* Sidebar branding */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.sidebar-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #00bfa6;
+  color: #102a43;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.sidebar-brand h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.sidebar-brand span {
+  display: block;
+  margin-top: 2px;
+  color: #9bb6c9;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+/* Navigation */
+.sidebar-navigation {
+  flex: 1;
+  padding-top: 26px;
+}
+
+.sidebar-section {
+  margin-bottom: 27px;
+}
+
+.sidebar-section-title {
+  margin: 0 0 12px 12px;
+  color: #8fa9bc;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 44px;
+  margin: 4px 0;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #d5e2ea;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.sidebar-link.active {
+  background: #00bfa6;
+  color: #102a43;
+  font-weight: 700;
+}
+
+.sidebar-link:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 3px;
+}
+
+.sidebar-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  flex-shrink: 0;
+  font-size: 19px;
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: auto;
+  padding: 18px 12px 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.sidebar-footer p {
+  margin: 0;
+  color: #9bb6c9;
+  font-size: 12px;
+}
+
+.sidebar-footer strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.sidebar-footer span {
+  margin-top: 12px;
+  color: #8fa9bc;
+  font-size: 10px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .dashboard-sidebar {
+    width: 245px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}
+
+/* Mobile slide-out drawer */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 290px;
+    max-width: 86vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    padding: 24px 16px 20px;
+    overflow-y: auto;
+    z-index: 999;
+
+    transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform 0.28s ease,
+      visibility 0.28s ease;
+
+    box-shadow: 12px 0 35px rgba(0, 0, 0, 0.15);
+  }
+
+  .dashboard-sidebar.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .sidebar-brand {
+    padding-bottom: 24px;
+  }
+
+  .sidebar-navigation {
+    padding-top: 22px;
+  }
+
+  .sidebar-section {
+    margin-bottom: 22px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-link,
+  .dashboard-sidebar {
+    transition: none;
+  }
+}
+
+/* Mobile sidebar close button */
+.sidebar-close-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar-close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .sidebar-close-button:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}

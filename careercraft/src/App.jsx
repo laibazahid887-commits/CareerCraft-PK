@@ -4,18 +4,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Careers from "./pages/Careers";
 import CareerDetails from "./pages/CareerDetails";
-import SkillGap from "./pages/SkillGap";
-import JobAnalyzer from "./pages/JobAnalyzer";
-import Roadmap from "./pages/Roadmap";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Profile from "./pages/Profile";
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MainLayout from "./components/MainLayout";
+import DashboardLayout from "./components/DashboardLayout";
 
 import Dashboard from "./pages/Dashboard";
+import SkillGap from "./pages/SkillGap";
+import JobAnalyzer from "./pages/JobAnalyzer";
+import Roadmap from "./pages/Roadmap";
+import Profile from "./pages/Profile";
 import CVGenerator from "./pages/CVGenerator";
 import JobApplicationTracker from "./pages/JobApplicationTracker";
 import ResumeAnalyzer from "./pages/ResumeAnalyzer";
@@ -26,18 +27,19 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Shared Layout - Navbar appears on all pages */}
+
+          {/* Public Website Layout */}
           <Route element={<MainLayout />}>
-            
-            {/* Public Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/:id" element={<CareerDetails />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+          </Route>
 
-            {/* Protected Pages */}
-            <Route element={<ProtectedRoute />}>
+          {/* Protected Application Layout */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/skill-gap" element={<SkillGap />} />
               <Route path="/job-analyzer" element={<JobAnalyzer />} />
@@ -58,6 +60,7 @@ function App() {
               />
             </Route>
           </Route>
+
         </Routes>
       </AuthProvider>
     </BrowserRouter>
